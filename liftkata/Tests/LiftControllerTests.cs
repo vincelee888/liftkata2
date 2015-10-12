@@ -67,9 +67,6 @@ namespace liftkata.Tests
             PassTime(floorSummonedFrom - requestedFloor);
 
             _stopsVisited.AssertThatLiftStopsAtFloor(new[] { floorSummonedFrom, requestedFloor});
-
-            Assert.That(_movesUpward, Is.EqualTo((floorSummonedFrom - startingFloor)));
-            Assert.That(_movesDownward, Is.EqualTo((floorSummonedFrom - startingFloor)));
         }
 
         void IListenToLifts.LiftArrived(int stop)
