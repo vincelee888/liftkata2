@@ -8,16 +8,11 @@ namespace liftkata.Tests
     public class LiftControllerTests : IListenToLifts
     {
         private List<int> _stopsVisited;
-        private int _movesDownward;
-        private int _movesUpward;
-        private IListenForTimePassing _listener;
 
         [SetUp]
         public void Setup()
         {
             _stopsVisited = new List<int>();
-            _movesUpward = 0;
-            _movesDownward = 0;
         }
 
         [Test]
@@ -89,12 +84,10 @@ namespace liftkata.Tests
 
         void IListenToLifts.LiftMovedDownwards()
         {
-            _movesDownward++;
         }
 
         void IListenToLifts.LiftMovedUpwards()
         {
-            _movesUpward++;
         }
     }
 }
