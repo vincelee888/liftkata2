@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LiftControllerBuilder.cs" />
+    <Compile Include="IListenForTimePassing.cs" />
     <Compile Include="LiftControllerTests.cs" />
     <Compile Include="IListenToLifts.cs" />
     <Compile Include="LiftController.cs" />
