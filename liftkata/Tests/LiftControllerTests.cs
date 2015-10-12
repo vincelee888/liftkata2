@@ -40,31 +40,12 @@ namespace liftkata.Tests
         }
 
         [Test]
-        public void SummonedFromAbove_RequestLowerFloor_LiftVisitsBothFloors()
+        public void SummonedTheRequestAnotherFloor_LiftVisitsBothFloors()
         {
             const int startingFloor = 1;
             var sut = new LiftController(startingFloor, this);
 
             const int floorSummonedFrom = 10;
-            sut.Summon(floorSummonedFrom);
-
-            TestHelpers.PassTime(sut, floorSummonedFrom, startingFloor);
-
-            const int requestedFloor = startingFloor;
-            sut.Request(requestedFloor);
-
-            TestHelpers.PassTime(sut, floorSummonedFrom, requestedFloor);
-
-            _stopsVisited.AssertThatLiftStopsAtFloor(new[] { floorSummonedFrom, requestedFloor });
-        }
-
-        [Test]
-        public void SummonedFromBelow_RequestHigherFloor_LiftVisitsBothFloors()
-        {
-            const int startingFloor = 10;
-            var sut = new LiftController(startingFloor, this);
-
-            const int floorSummonedFrom = 1;
             sut.Summon(floorSummonedFrom);
 
             TestHelpers.PassTime(sut, floorSummonedFrom, startingFloor);
