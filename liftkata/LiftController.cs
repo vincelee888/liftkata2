@@ -10,7 +10,7 @@ namespace liftkata
         private readonly IListenToLifts _listener;
         private int _floorSummonedFrom;
         private int _requestedFloor;
-        private List<int> _floorsToVisit;
+        private readonly List<int> _floorsToVisit;
 
         public LiftController(int currentFloor, IListenToLifts listener)
         {
@@ -33,18 +33,22 @@ namespace liftkata
 
         public void Tick()
         {
-            if (!_floorsToVisit.Any()) return;
-            
+            var targetFloor = GetNextFloor();
+            Move(targetFloor);
+            if (_currentFloor == targetFloor) AtCurrentFloor();
+        }
+
+        private int GetNextFloor()
+        {
+            if (!_floorsToVisit.Any()) return _currentFloor;
             var targetFloor = _floorsToVisit.First();
-            if (_currentFloor != targetFloor)
-            {
-                Move(targetFloor);
-                if (_currentFloor == targetFloor)
-                {
-                    _listener.LiftArrived(_currentFloor);
-                    _floorsToVisit.RemoveAt(0);
-                }
-            }
+            return targetFloor;
+        }
+
+        private void AtCurrentFloor()
+        {
+            _listener.LiftArrived(_currentFloor);
+            _floorsToVisit.RemoveAt(0);
         }
 
         private void Move(int targetFloor)
