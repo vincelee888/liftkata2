@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace liftkata
+namespace liftkata.Implementation
 {
     public class LiftController : IListenForTimePassing
     {

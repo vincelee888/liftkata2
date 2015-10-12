@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using liftkata.Implementation;
 
-namespace liftkata
+namespace liftkata.Tests
 {
     [TestFixture]
     public class LiftControllerTests : IListenToLifts

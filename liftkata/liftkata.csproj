@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IListenForTimePassing.cs" />
-    <Compile Include="LiftControllerTests.cs" />
-    <Compile Include="IListenToLifts.cs" />
-    <Compile Include="LiftController.cs" />
+    <Compile Include="Implementation\IListenForTimePassing.cs" />
+    <Compile Include="Tests\LiftControllerTests.cs" />
+    <Compile Include="Implementation\IListenToLifts.cs" />
+    <Compile Include="Implementation\LiftController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestHelpers.cs" />
+    <Compile Include="Tests\TestHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

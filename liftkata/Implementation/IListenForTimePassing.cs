@@ -1,4 +1,4 @@
-﻿namespace liftkata
+﻿namespace liftkata.Implementation
 {
     internal interface IListenForTimePassing
     {
