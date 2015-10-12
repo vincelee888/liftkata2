@@ -8,8 +8,6 @@ namespace liftkata
     {
         private int _currentFloor;
         private readonly IListenToLifts _listener;
-        private int _floorSummonedFrom;
-        private int _requestedFloor;
         private readonly List<int> _floorsToVisit;
 
         public LiftController(int currentFloor, IListenToLifts listener)
@@ -21,13 +19,11 @@ namespace liftkata
 
         public void Summon(int floorSummonedFrom)
         {
-            _floorSummonedFrom = floorSummonedFrom;
             _floorsToVisit.Add(floorSummonedFrom);
         }
 
         public void Request(int requestedFloor)
         {
-            _requestedFloor = requestedFloor;
             _floorsToVisit.Add(requestedFloor);
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace liftkata
@@ -66,7 +65,7 @@ namespace liftkata
 
             PassTime(floorSummonedFrom - requestedFloor);
 
-            _stopsVisited.AssertThatLiftStopsAtFloor(new int[] { floorSummonedFrom, requestedFloor});
+            _stopsVisited.AssertThatLiftStopsAtFloor(new[] { floorSummonedFrom, requestedFloor});
 
             Assert.That(_movesUpward, Is.EqualTo((floorSummonedFrom - startingFloor)));
             Assert.That(_movesDownward, Is.EqualTo((floorSummonedFrom - startingFloor)));
