@@ -26,11 +26,9 @@ namespace liftkata.Tests
             const int startingFloor = 10;
             var sut = new LiftController(startingFloor, this);
 
-            _listener = sut;
-
             const int floorSummonedFrom = 1;
             sut.Summon(floorSummonedFrom);
-            PassTime(startingFloor - floorSummonedFrom);
+            TestHelpers.PassTime(sut, startingFloor, floorSummonedFrom);
             _stopsVisited.AssertThatLiftStopsAtFloor(floorSummonedFrom);
         }
 
@@ -40,11 +38,9 @@ namespace liftkata.Tests
             const int startingFloor = 1;
             var sut = new LiftController(startingFloor, this);
 
-            _listener = sut;
-
             const int floorSummonedFrom = 10;
             sut.Summon(floorSummonedFrom);
-            PassTime(floorSummonedFrom - startingFloor);
+            TestHelpers.PassTime(sut, floorSummonedFrom, startingFloor);
             Assert.That(_stopsVisited.Contains(floorSummonedFrom), Is.True);
         }
 
@@ -54,19 +50,36 @@ namespace liftkata.Tests
             const int startingFloor = 1;
             var sut = new LiftController(startingFloor, this);
 
-            _listener = sut;
-
             const int floorSummonedFrom = 10;
             sut.Summon(floorSummonedFrom);
 
-            PassTime(floorSummonedFrom - startingFloor);
+            TestHelpers.PassTime(sut, floorSummonedFrom, startingFloor);
 
             const int requestedFloor = startingFloor;
             sut.Request(requestedFloor);
 
-            PassTime(floorSummonedFrom - requestedFloor);
+            TestHelpers.PassTime(sut, floorSummonedFrom, requestedFloor);
 
-            _stopsVisited.AssertThatLiftStopsAtFloor(new[] { floorSummonedFrom, requestedFloor});
+            _stopsVisited.AssertThatLiftStopsAtFloor(new[] { floorSummonedFrom, requestedFloor });
+        }
+
+        [Test]
+        public void SummonedFromBelow_RequestHigherFloor_LiftVisitsBothFloors()
+        {
+            const int startingFloor = 10;
+            var sut = new LiftController(startingFloor, this);
+
+            const int floorSummonedFrom = 1;
+            sut.Summon(floorSummonedFrom);
+
+            TestHelpers.PassTime(sut, floorSummonedFrom, startingFloor);
+
+            const int requestedFloor = startingFloor;
+            sut.Request(requestedFloor);
+
+            TestHelpers.PassTime(sut, floorSummonedFrom, requestedFloor);
+
+            _stopsVisited.AssertThatLiftStopsAtFloor(new[] { floorSummonedFrom, requestedFloor });
         }
 
         void IListenToLifts.LiftArrived(int stop)
@@ -82,14 +95,6 @@ namespace liftkata.Tests
         void IListenToLifts.LiftMovedUpwards()
         {
             _movesUpward++;
-        }
-
-        private void PassTime(int ticks)
-        {
-            for(var i = 0; i < ticks; i++)
-            {
-                _listener.Tick();
-            }
         }
     }
 }
