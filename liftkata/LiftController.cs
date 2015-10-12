@@ -35,7 +35,7 @@ namespace liftkata
         {
             var targetFloor = GetNextFloor();
             Move(targetFloor);
-            if (_currentFloor == targetFloor) AtCurrentFloor();
+            if (_currentFloor == targetFloor) ArrivedAtCurrentFloor();
         }
 
         private int GetNextFloor()
@@ -45,7 +45,7 @@ namespace liftkata
             return targetFloor;
         }
 
-        private void AtCurrentFloor()
+        private void ArrivedAtCurrentFloor()
         {
             _listener.LiftArrived(_currentFloor);
             _floorsToVisit.RemoveAt(0);
